@@ -72,7 +72,7 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(-
 aside{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#000;color:#fff;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));border-top:4px solid #FF1F36}
 @media (min-width:900px){aside{position:sticky;top:calc(20px + env(safe-area-inset-top,0px));bottom:auto;align-self:start;padding:26px;border-top:6px solid #FF1F36;outline:1px solid var(--soft-line)}}
 .est-label{font-size:13.5px;color:#BDBDBD;margin:0;text-transform:uppercase;letter-spacing:.08em}
-.range{font-size:clamp(26px,4.5vw,36px);font-weight:700;margin:2px 0 10px;line-height:1.1;white-space:nowrap}
+.range{font-size:clamp(26px,4.5vw,36px);font-weight:700;margin:2px 0 10px;line-height:1.1;white-space:nowrap;overflow:hidden}
 .scale{position:relative;height:8px;background:#2A2A2A}
 .band{position:absolute;top:0;bottom:0;background:#FF1F36;transition:left .35s ease,width .35s ease}
 .ticks{display:flex;justify-content:space-between;font-size:12px;color:#9A9A9A;margin-top:6px}
@@ -415,6 +415,13 @@ async function loadRates(){
     }
   } catch(_){}
 }
+function fitRange(){
+  const el = document.getElementById("range"); if (!el) return;
+  el.style.fontSize = "";
+  const w = el.clientWidth, sw = el.scrollWidth;
+  if (w && sw > w){ const fs = parseFloat(getComputedStyle(el).fontSize); el.style.fontSize = Math.max(16, Math.floor(fs * w / sw * 0.97)) + "px"; }
+}
+window.addEventListener("resize", fitRange);
 function track(goal){
   try { if (window.ym) ym(112956988, "reachGoal", goal); } catch(_){}
   try { if (window.gtag) gtag("event", goal); } catch(_){}
@@ -437,7 +444,7 @@ function calc(){
   if (rush){ lo*=1.25; hi*=1.25; }
   lo = round(lo*PRICE_K); hi = round(hi*PRICE_K);
 
-  document.getElementById("range").textContent = moneyRange(lo, hi);
+  document.getElementById("range").textContent = moneyRange(lo, hi); fitRange();
   const band = document.getElementById("band");
   band.style.left = Math.min(lo/MAX,1)*100 + "%";
   band.style.width = Math.max((Math.min(hi,MAX)-Math.min(lo,MAX))/MAX*100, 1.5) + "%";
