@@ -335,11 +335,11 @@ const tr = s => LANG === "fr" && FR[s] ? FR[s] : s;
 /* === Цены (CHF) === */
 const PRICE_K = 0.8;   /* 1 = средние цены, 0.8 = на 20% ниже */
 const TYPES = {
-  landing:  {name:"Одностраничный сайт", lo:835,  hi:3000,  w:[2,4],  sup:[25,60]},
-  card:     {name:"Сайт-визитка",        lo:2500,  hi:6500,  w:[4,8],  sup:[30,100]},
-  corp:     {name:"Большой сайт компании", lo:7500, hi:25000, w:[8,14], sup:[80,200]},
-  shop:     {name:"Интернет-магазин",    lo:12000, hi:40000, w:[10,20], sup:[150,400]},
-  platform: {name:"Веб-сервис или платформа", lo:30000, hi:70000, w:[16,30], sup:[200,600]}
+  landing:  {name:"Одностраничный сайт", lo:835,  hi:3000,  w:[1,2],  sup:[25,60]},
+  card:     {name:"Сайт-визитка",        lo:2500,  hi:6500,  w:[2,4],  sup:[30,100]},
+  corp:     {name:"Большой сайт компании", lo:7500, hi:25000, w:[4,7], sup:[80,200]},
+  shop:     {name:"Интернет-магазин",    lo:12000, hi:40000, w:[5,10], sup:[150,400]},
+  platform: {name:"Веб-сервис или платформа", lo:30000, hi:70000, w:[8,15], sup:[200,600]}
 };
 const DESIGN = {template:{name:"Шаблон",k:.75}, custom:{name:"Индивидуальный",k:1}, premium:{name:"Премиальный с анимацией",k:1.3}};
 const LANG_K = {1:1, 2:1.2, 3:1.35};
@@ -450,10 +450,10 @@ function calc(){
   band.style.width = Math.max((Math.min(hi,MAX)-Math.min(lo,MAX))/MAX*100, 1.5) + "%";
 
   let [w1,w2] = t.w;
-  const extra = picked.length > 2 ? 2 : 0;
+  const extra = picked.length > 2 ? 1 : 0;
   w1 += extra; w2 += extra;
-  if (rush){ w1 = Math.max(1,Math.round(w1*.7)); w2 = Math.round(w2*.7); }
-  document.getElementById("weeks").textContent = `${w1}–${w2} ${tr("нед.")}`;
+  if (rush){ w1 = Math.max(1,Math.round(w1*.7)); w2 = Math.max(w1,Math.round(w2*.7)); }
+  document.getElementById("weeks").textContent = `${w1 === w2 ? w1 : w1 + "–" + w2} ${tr("нед.")}`;
   document.getElementById("support").textContent = CUR === "CHF" ? `${t.sup[0]}–${t.sup[1]} ${tr("CHF/мес")}` : `${fmt(conv(t.sup[0]))}–${fmt(conv(t.sup[1]))} ${CUR_SIGN[CUR]}${tr("/мес")}`;
 
   window.D = {type:t.name, design:d.name, langs:(langs===3?"3+":String(langs)), features:picked.join(", "), made:made.join(", "), time:(rush?"срочно":"обычные"), lo, hi, cur: CUR};
