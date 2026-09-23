@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CODE ACTION — стоимость сайта · prix d’un site</title>
+<meta name="description" content="Калькулятор стоимости сайта: ответьте на 6 вопросов и получите вилку цен в CHF. Calculateur du prix d’un site web en CHF.">
+<meta property="og:title" content="CODE ACTION — сколько стоит ваш сайт · combien coûtera votre site">
+<meta property="og:description" content="Ответьте на 6 вопросов и сразу увидите вилку цен в CHF. Répondez à 6 questions et voyez la fourchette de prix en CHF.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Cpolygon points='22,82 40,18 56,18 74,82 61,82 48,34 35,82' fill='%23fff'/%3E%3Crect x='32' y='56' width='30' height='10' fill='%23fff'/%3E%3Cpolygon points='70,82 82,82 96,18 84,18' fill='%23FF1F36'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#FFFFFF; --ink:#000000; --muted:#5E5E5E; --line:#000000; --soft-line:#DADADA;
+  --accent:#E3001B; --accent-ink:#FFFFFF; --sel:#000000; --sel-ink:#FFFFFF; --track:#E6E6E6;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#000000; --surface:#000000; --ink:#FFFFFF; --muted:#A3A3A3; --line:#FFFFFF; --soft-line:#333333;
+    --accent:#FF1F36; --sel:#FFFFFF; --sel-ink:#000000; --track:#2A2A2A;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#000000; --surface:#000000; --ink:#FFFFFF; --muted:#A3A3A3; --line:#FFFFFF; --soft-line:#333333;
+  --accent:#FF1F36; --sel:#FFFFFF; --sel-ink:#000000; --track:#2A2A2A;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Golos Text",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;font-size:16px;line-height:1.55}
+h1,h2,.num,.brand{font-family:"Oswald","Arial Narrow",Impact,sans-serif}
+
+.topbar{background:#000;color:#fff;padding:14px 20px;padding-top:calc(14px + env(safe-area-inset-top,0px));margin-top:calc(-1 * env(safe-area-inset-top,0px))}
+.topbar .in{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-size:22px;font-weight:700;letter-spacing:.1em;line-height:1}
+.brand i{font-style:normal;color:#FF1F36}
+.topbar small{color:#BDBDBD;font-size:13px}
+.topbar .right{display:flex;align-items:center;gap:16px}
+@media (max-width:640px){.topbar small{display:none}}
+.lang{display:flex;border:1.5px solid #fff}
+.lang button{background:transparent;color:#fff;border:0;padding:6px 11px;font:600 14px "Oswald","Arial Narrow",sans-serif;letter-spacing:.08em;cursor:pointer}
+.lang button[aria-pressed="true"]{background:#fff;color:#000}
+
+.wrap{max-width:1080px;margin:0 auto;padding:44px 20px 150px;display:grid;grid-template-columns:1fr;gap:32px}
+@media (min-width:900px){.wrap{grid-template-columns:minmax(0,1fr) 360px;padding-bottom:60px}}
+header{grid-column:1/-1;border-left:6px solid var(--accent);padding-left:20px}
+h1{font-size:clamp(34px,6.5vw,64px);line-height:1.02;margin:0 0 14px;font-weight:700;text-transform:uppercase;max-width:14ch}
+.lead{color:var(--muted);max-width:60ch;margin:0}
+form{display:flex;flex-direction:column;gap:0}
+fieldset{border:0;margin:0;padding:26px 0;border-top:2px solid var(--line)}
+legend{float:left;width:100%;padding:0;margin:0 0 6px;display:flex;gap:14px;align-items:baseline}
+legend .n{font-family:"Oswald",sans-serif;font-size:30px;color:var(--accent);font-weight:700;min-width:28px;line-height:1}
+legend h2{font-size:22px;margin:0;font-weight:500;text-transform:uppercase;letter-spacing:.02em}
+.hint{clear:both;color:var(--muted);font-size:14px;margin:0 0 14px 42px}
+.opts{clear:both;display:grid;gap:8px;margin-left:42px}
+@media (max-width:520px){.opts,.hint{margin-left:0}}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:1.5px solid var(--soft-line);cursor:pointer;transition:border-color .15s,background .15s,color .15s}
+.opt:hover{border-color:var(--ink)}
+.opt input{margin:3px 0 0;accent-color:var(--accent);width:18px;height:18px;flex:none}
+.opt:has(input:checked){border-color:var(--sel);background:var(--sel);color:var(--sel-ink)}
+.opt:has(input:checked) small{color:inherit;opacity:.75}
+.opt b{font-weight:600;display:block}
+.opt small{color:var(--muted);font-size:13.5px}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+aside{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#000;color:#fff;padding:14px 20px calc(14px + env(safe-area-inset-bottom,0px));border-top:4px solid #FF1F36}
+@media (min-width:900px){aside{position:sticky;top:calc(20px + env(safe-area-inset-top,0px));bottom:auto;align-self:start;padding:26px;border-top:6px solid #FF1F36;outline:1px solid var(--soft-line)}}
+.est-label{font-size:13.5px;color:#BDBDBD;margin:0;text-transform:uppercase;letter-spacing:.08em}
+.range{font-size:clamp(26px,4.5vw,36px);font-weight:700;margin:2px 0 10px;line-height:1.1;white-space:nowrap}
+.scale{position:relative;height:8px;background:#2A2A2A}
+.band{position:absolute;top:0;bottom:0;background:#FF1F36;transition:left .35s ease,width .35s ease}
+.ticks{display:flex;justify-content:space-between;font-size:12px;color:#9A9A9A;margin-top:6px}
+.more{display:none}
+@media (min-width:900px){.more{display:block}}
+.meta{margin:18px 0 0;padding:0;list-style:none;font-size:14.5px}
+.meta li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid #333}
+.meta span:first-child{color:#BDBDBD}
+.btn{display:block;width:100%;text-align:center;margin-top:12px;padding:14px 16px;border:2px solid var(--accent);background:var(--accent);color:#fff;font:600 16px "Oswald","Arial Narrow",sans-serif;text-transform:uppercase;letter-spacing:.06em;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.note{font-size:12.5px;color:#9A9A9A;margin:14px 0 0}
+.mobile-go{display:inline-block;margin-top:8px;font-size:14px;color:#FF1F36;background:none;border:0;padding:0;font-weight:600;cursor:pointer}
+@media (min-width:900px){.mobile-go{display:none}}
+.final{border-top:2px solid var(--line);padding:26px 0 0}
+.final h2{font-size:26px;margin:0 0 8px;font-weight:700;text-transform:uppercase}
+.final p{margin:0 0 6px;color:var(--muted)}
+.field{clear:both;display:block;margin:0 0 14px 42px}
+@media (max-width:520px){.field{margin-left:0}}
+.field span{display:block;font-weight:600;margin-bottom:6px}
+.field span em{font-style:normal;color:var(--accent)}
+.field input,.field textarea{width:100%;font:16px "Golos Text",system-ui,sans-serif;color:var(--ink);background:var(--bg);border:1.5px solid var(--soft-line);padding:11px 12px;border-radius:0}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--ink)}
+.field textarea{min-height:96px;resize:vertical}
+.field.err input{border-color:var(--accent)}
+.send{display:grid;gap:0;grid-template-columns:1fr}
+.btn:disabled{opacity:.7;cursor:default}
+.send .btn{margin-top:12px}
+@media (min-width:560px){.send{grid-template-columns:1fr 1fr;gap:12px}}
+.btn.tg{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top,0px));transform:translateX(-50%);background:#FF1F36;color:#fff;padding:10px 16px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+.toast.show{opacity:1}
+@media (prefers-reduced-motion:reduce){.band,.opt{transition:none}}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="in"><span class="brand" role="img" aria-label="Code Action"><svg width="62" height="28" viewBox="0 6 168 88" aria-hidden="true" style="display:block"><polyline points="28,14 6,50 28,86" fill="none" stroke="#fff" stroke-width="15"/><polygon points="34,92 54,8 72,8 92,92 76,92 63,38 50,92" fill="#fff"/><rect x="46" y="60" width="34" height="13" fill="#fff"/><polygon points="96,92 112,92 132,8 116,8" fill="#FF1F36"/><polyline points="140,14 162,50 140,86" fill="none" stroke="#fff" stroke-width="15"/></svg><span>CODE ACTION</span></span><div class="right"><small>Калькулятор стоимости сайта</small><div class="lang" role="group" aria-label="Язык / Langue"><button type="button" data-l="ru" aria-pressed="true">RU</button><button type="button" data-l="fr" aria-pressed="false">FR</button></div></div></div></div>
+<div class="wrap">
+  <header>
+    <h1>Сколько будет стоить ваш сайт</h1>
+    <p class="lead">Ответьте на вопросы, и вы сразу увидите ориентировочную вилку цен. Расчёт основан на средних ценах швейцарских веб-агентств в 2026 году. В конце отправьте бриф нам, и мы подготовим точную смету.</p>
+  </header>
+
+  <form id="f">
+    <fieldset>
+      <legend><span class="n">1</span><h2>Какой сайт нужен?</h2></legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="type" value="landing"><span><b>Одностраничный сайт</b><small>Одна страница о вас или об одной услуге, по вашим готовым текстам и фото</small></span></label>
+        <label class="opt"><input type="radio" name="type" value="card" checked><span><b>Сайт-визитка</b><small>До 10 страниц: о нас, услуги, цены, контакты</small></span></label>
+        <label class="opt"><input type="radio" name="type" value="corp"><span><b>Большой сайт компании</b><small>10–30+ страниц, много услуг, блог, команда</small></span></label>
+        <label class="opt"><input type="radio" name="type" value="shop"><span><b>Интернет-магазин</b><small>Каталог, корзина, оплата, доставка</small></span></label>
+        <label class="opt"><input type="radio" name="type" value="platform"><span><b>Веб-сервис или платформа</b><small>Личные кабинеты, сложная логика, свои функции</small></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="n">2</span><h2>Какой нужен дизайн?</h2></legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="design" value="template"><span><b>На основе готового шаблона</b><small>Быстрее и дешевле, но менее уникально</small></span></label>
+        <label class="opt"><input type="radio" name="design" value="custom" checked><span><b>Индивидуальный дизайн</b><small>Под ваш бренд и аудиторию</small></span></label>
+        <label class="opt"><input type="radio" name="design" value="premium"><span><b>Премиальный, с анимацией</b><small>Эффектные переходы, проработанные детали</small></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="n">3</span><h2>Сколько языков?</h2></legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="lang" value="1" checked><span><b>Один язык</b></span></label>
+        <label class="opt"><input type="radio" name="lang" value="2"><span><b>Два языка</b></span></label>
+        <label class="opt"><input type="radio" name="lang" value="3"><span><b>Три языка и больше</b></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="n">4</span><h2>Что должен уметь сайт?</h2></legend>
+      <p class="hint">Отметьте всё, что нужно</p>
+      <div class="opts" id="features"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="n">5</span><h2>Что уже есть, а что нужно сделать?</h2></legend>
+      <p class="hint">Отметьте, что нужно подготовить нам</p>
+      <div class="opts" id="content"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="n">6</span><h2>Когда нужен сайт?</h2></legend>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="time" value="normal" checked><span><b>В обычные сроки</b><small>Работаем без спешки</small></span></label>
+        <label class="opt"><input type="radio" name="time" value="rush"><span><b>Срочно</b><small>Нужно как можно быстрее, есть жёсткий дедлайн</small></span></label>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="n">7</span><h2>О вас и задаче</h2></legend>
+      <p class="hint">Поля со звёздочкой обязательны, остальные по желанию</p>
+      <label class="field" id="f-name"><span>Как вас зовут <em>*</em></span><input name="name" autocomplete="name"></label>
+      <label class="field" id="f-contact"><span>Телефон или ник в мессенджере <em>*</em></span><input name="contact" autocomplete="tel"></label>
+      <label class="field"><span>Компания и чем занимаетесь</span><input name="company"></label>
+      <label class="field"><span>Текущий сайт (если есть)</span><input name="cursite" placeholder="https://"></label>
+      <label class="field"><span>Опишите задачу своими словами</span><textarea name="task" placeholder="Для кого сайт, что на нём должно быть, чего хотите добиться"></textarea></label>
+      <label class="field"><span>Сайты, которые вам нравятся</span><textarea name="refs" placeholder="Ссылки и что именно нравится"></textarea></label>
+      <label class="field"><span>Желаемая дата запуска</span><input name="date"></label>
+      <label class="field"><span>Планируемый бюджет</span><input name="budget"></label>
+    </fieldset>
+
+    <section class="final" id="final">
+      <h2>Отправьте бриф нам</h2>
+      <p id="sendtext">Нажмите «Отправить бриф», и мы получим ваши ответы. Если удобнее, напишите нам в Telegram: ответы уже будут в сообщении.</p>
+      <button type="button" class="btn" id="save">Отправить бриф</button>
+      <div class="send">
+        <a class="btn tg" id="tg" target="_blank" rel="noopener" href="#">Написать в Telegram</a>
+        <button type="button" class="btn ghost" id="copy">Скопировать ответы</button>
+      </div>
+    </section>
+  </form>
+
+  <aside aria-live="polite">
+    <p class="est-label">Ориентировочная стоимость</p>
+    <div class="range num" id="range">—</div>
+    <div class="scale" aria-hidden="true"><div class="band" id="band"></div></div>
+    <div class="ticks" aria-hidden="true"><span>0</span><span>20 000</span><span>40 000</span><span>60 000+</span></div>
+    <button type="button" class="mobile-go" id="go">Отправить бриф</button>
+    <div class="more">
+      <ul class="meta">
+        <li><span>Срок разработки</span><span id="weeks">—</span></li>
+        <li><span>Поддержка после запуска</span><span id="support">—</span></li>
+      </ul>
+      <p class="note">Цены в швейцарских франках, без НДС. Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.</p>
+    </div>
+  </aside>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+/* === Настройки: контакты для кнопок отправки (оставьте пустыми, чтобы скрыть) === */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbwDoMfdVPapjBj47FR3cSToH_NNsAyTMI0ES8-HZsRT7MpMsD7tu5rxAhTFDcG6uTw6/exec";
+const TG_BASE = "https://t.me/";
+const TELEGRAM_USER = "code_action_a";     /* ник без @ */
+
+/* === Перевод: русский текст → французский === */
+const FR = {
+  "Калькулятор стоимости сайта":"Calculateur du prix d’un site",
+  "Сколько будет стоить ваш сайт":"Combien coûtera votre site",
+  "Ответьте на вопросы, и вы сразу увидите ориентировочную вилку цен. Расчёт основан на средних ценах швейцарских веб-агентств в 2026 году. В конце отправьте бриф нам, и мы подготовим точную смету.":"Répondez aux questions et vous verrez tout de suite une fourchette de prix indicative. Le calcul se base sur les prix moyens des agences web suisses en 2026. À la fin, envoyez-nous le brief et nous préparerons un devis précis.",
+  "Какой сайт нужен?":"Quel site vous faut-il ?",
+  "Одностраничный сайт":"Site one-page",
+  "Одна страница о вас или об одной услуге, по вашим готовым текстам и фото":"Une seule page sur vous ou sur un service, avec vos textes et photos",
+  "Сайт-визитка":"Site vitrine",
+  "До 10 страниц: о нас, услуги, цены, контакты":"Jusqu’à 10 pages : à propos, services, tarifs, contact",
+  "Большой сайт компании":"Grand site d’entreprise",
+  "10–30+ страниц, много услуг, блог, команда":"10 à 30+ pages, nombreux services, blog, équipe",
+  "Интернет-магазин":"Boutique en ligne",
+  "Каталог, корзина, оплата, доставка":"Catalogue, panier, paiement, livraison",
+  "Веб-сервис или платформа":"Service web ou plateforme",
+  "Личные кабинеты, сложная логика, свои функции":"Espaces clients, logique complexe, fonctions sur mesure",
+  "Какой нужен дизайн?":"Quel design souhaitez-vous ?",
+  "На основе готового шаблона":"Basé sur un modèle existant",
+  "Быстрее и дешевле, но менее уникально":"Plus rapide et moins cher, mais moins unique",
+  "Индивидуальный дизайн":"Design sur mesure",
+  "Под ваш бренд и аудиторию":"Adapté à votre marque et à votre public",
+  "Премиальный, с анимацией":"Premium, avec animations",
+  "Эффектные переходы, проработанные детали":"Transitions élégantes, détails soignés",
+  "Сколько языков?":"Combien de langues ?",
+  "Один язык":"Une langue", "Два языка":"Deux langues", "Три языка и больше":"Trois langues ou plus",
+  "Что должен уметь сайт?":"Que doit faire le site ?",
+  "Отметьте всё, что нужно":"Cochez tout ce dont vous avez besoin",
+  "Форма заявки и кнопки мессенджеров":"Formulaire de contact et boutons de messagerie",
+  "WhatsApp, Telegram, звонок":"WhatsApp, Telegram, appel",
+  "Онлайн-запись":"Réservation en ligne",
+  "Выбор услуги, мастера и времени":"Choix du service, du spécialiste et de l’horaire",
+  "Онлайн-оплата":"Paiement en ligne",
+  "Карты, TWINT и другие способы":"Cartes, TWINT et autres moyens",
+  "Личный кабинет клиента":"Espace client",
+  "История заказов, бонусы, записи":"Historique des commandes, bonus, réservations",
+  "Блог или новости":"Blog ou actualités",
+  "Сами публикуете статьи":"Vous publiez vous-même vos articles",
+  "Калькулятор или подбор услуги":"Calculateur ou sélecteur de service",
+  "Посетитель сам считает цену":"Le visiteur calcule lui-même le prix",
+  "Связь с CRM":"Connexion à votre CRM",
+  "Заявки автоматически попадают в вашу систему":"Les demandes arrivent automatiquement dans votre système",
+  "Рассылка":"Newsletter",
+  "Сбор подписчиков и письма клиентам":"Collecte d’abonnés et e-mails aux clients",
+  "Что уже есть, а что нужно сделать?":"Qu’avez-vous déjà, que faut-il créer ?",
+  "Отметьте, что нужно подготовить нам":"Cochez ce que nous devons préparer",
+  "Логотип и фирменный стиль":"Logo et identité visuelle",
+  "Тексты для сайта":"Textes du site",
+  "Копирайтер напишет продающие тексты":"Un rédacteur écrira des textes qui vendent",
+  "Фотосъёмка":"Séance photo",
+  "Профессиональные фото вас и ваших работ":"Photos professionnelles de vous et de vos réalisations",
+  "Переводы на другие языки":"Traductions dans d’autres langues",
+  "Стартовое SEO и аналитика":"SEO de base et statistiques",
+  "Чтобы сайт находили в поиске":"Pour que votre site soit trouvé sur Google",
+  "Когда нужен сайт?":"Pour quand vous faut-il le site ?",
+  "В обычные сроки":"Délais normaux", "Работаем без спешки":"Sans précipitation",
+  "Срочно":"Urgent", "Нужно как можно быстрее, есть жёсткий дедлайн":"Au plus vite, avec une échéance ferme",
+  "О вас и задаче":"Vous et votre projet",
+  "Поля со звёздочкой обязательны, остальные по желанию":"Les champs marqués d’un astérisque sont obligatoires, les autres sont facultatifs",
+  "Как вас зовут":"Votre nom",
+  "Телефон или ник в мессенджере":"Téléphone ou pseudo de messagerie",
+  "Компания и чем занимаетесь":"Entreprise et activité",
+  "Текущий сайт (если есть)":"Site actuel (le cas échéant)",
+  "Опишите задачу своими словами":"Décrivez votre projet avec vos mots",
+  "Для кого сайт, что на нём должно быть, чего хотите добиться":"À qui s’adresse le site, ce qu’il doit contenir, vos objectifs",
+  "Сайты, которые вам нравятся":"Sites que vous aimez",
+  "Ссылки и что именно нравится":"Liens et ce qui vous plaît",
+  "Желаемая дата запуска":"Date de lancement souhaitée",
+  "Планируемый бюджет":"Budget prévu",
+  "Отправьте бриф нам":"Envoyez-nous le brief",
+  "Отправить бриф":"Envoyer le brief",
+  "Отправляем…":"Envoi…",
+  "Бриф отправлен ✓":"Brief envoyé ✓",
+  "Написать в Telegram":"Écrire sur Telegram",
+  "Скопировать ответы":"Copier les réponses",
+  "Ориентировочная стоимость":"Coût estimatif",
+  "Срок разработки":"Délai de réalisation",
+  "Поддержка после запуска":"Maintenance après lancement",
+  "Цены в швейцарских франках, без НДС. Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.":"Prix en francs suisses, hors TVA. Il s’agit d’une estimation et non d’une offre : le coût final dépend des détails du projet.",
+  "Нажмите «Отправить бриф», и мы получим ваши ответы. Если удобнее, напишите нам в Telegram: ответы уже будут в сообщении.":"Cliquez sur « Envoyer le brief » et nous recevrons vos réponses. Si vous préférez, écrivez-nous sur Telegram : vos réponses seront déjà dans le message.",
+  "Напишите нам в Telegram: откроется чат, а все ваши ответы уже будут в сообщении. Или скопируйте ответы и отправьте удобным способом.":"Écrivez-nous sur Telegram : la conversation s’ouvrira avec toutes vos réponses dans le message. Ou copiez vos réponses et envoyez-les comme vous le souhaitez.",
+  "нед.":"sem.", "CHF/мес":"CHF/mois",
+  "Укажите имя и контакт, чтобы мы могли ответить":"Indiquez votre nom et un contact pour que nous puissions vous répondre",
+  "Ответы скопированы: если чат открылся пустым, просто вставьте их":"Réponses copiées : si la conversation s’ouvre vide, collez-les simplement",
+  "Спасибо! Мы свяжемся с вами в ближайшее время":"Merci ! Nous vous contacterons très prochainement",
+  "Не получилось отправить. Напишите нам в Telegram":"L’envoi a échoué. Écrivez-nous sur Telegram",
+  "Ответы скопированы":"Réponses copiées",
+  "Не удалось скопировать. Выделите текст вручную":"Copie impossible. Sélectionnez le texte manuellement",
+  "БРИФ НА САЙТ":"BRIEF SITE WEB",
+  "Имя":"Nom", "Контакт":"Contact", "Компания":"Entreprise", "Текущий сайт":"Site actuel", "Задача":"Projet", "Нравятся сайты":"Sites appréciés", "Дата запуска":"Date de lancement", "Бюджет":"Budget",
+  "Сайт":"Site", "Дизайн":"Design", "Языков":"Langues", "3 и больше":"3 et plus", "Функции":"Fonctions", "базовые":"de base",
+  "Нужно сделать":"À réaliser", "ничего дополнительно":"rien de plus", "Сроки":"Délais", "срочно":"urgent", "обычные":"normaux",
+  "Шаблон":"Modèle", "Индивидуальный":"Sur mesure", "Премиальный с анимацией":"Premium avec animations",
+  "Язык":"Langue"
+};
+let LANG = "ru";
+const tr = s => LANG === "fr" && FR[s] ? FR[s] : s;
+
+/* === Цены (CHF) === */
+const PRICE_K = 0.8;   /* 1 = средние цены, 0.8 = на 20% ниже */
+const TYPES = {
+  landing:  {name:"Одностраничный сайт", lo:835,  hi:3000,  w:[2,4],  sup:[25,60]},
+  card:     {name:"Сайт-визитка",        lo:2500,  hi:6500,  w:[4,8],  sup:[30,100]},
+  corp:     {name:"Большой сайт компании", lo:7500, hi:25000, w:[8,14], sup:[80,200]},
+  shop:     {name:"Интернет-магазин",    lo:12000, hi:40000, w:[10,20], sup:[150,400]},
+  platform: {name:"Веб-сервис или платформа", lo:30000, hi:70000, w:[16,30], sup:[200,600]}
+};
+const DESIGN = {template:{name:"Шаблон",k:.75}, custom:{name:"Индивидуальный",k:1}, premium:{name:"Премиальный с анимацией",k:1.3}};
+const LANG_K = {1:1, 2:1.2, 3:1.35};
+const FEATURES = [
+  ["form","Форма заявки и кнопки мессенджеров","WhatsApp, Telegram, звонок",100,400],
+  ["booking","Онлайн-запись","Выбор услуги, мастера и времени",600,2500],
+  ["pay","Онлайн-оплата","Карты, TWINT и другие способы",800,2500],
+  ["account","Личный кабинет клиента","История заказов, бонусы, записи",3000,10000],
+  ["blog","Блог или новости","Сами публикуете статьи",500,1500],
+  ["calc","Калькулятор или подбор услуги","Посетитель сам считает цену",800,3000],
+  ["crm","Связь с CRM","Заявки автоматически попадают в вашу систему",1000,4000],
+  ["mail","Рассылка","Сбор подписчиков и письма клиентам",300,900]
+];
+const CONTENT = [
+  ["logo","Логотип и фирменный стиль","",800,4000],
+  ["texts","Тексты для сайта","Копирайтер напишет продающие тексты",800,3000],
+  ["photo","Фотосъёмка","Профессиональные фото вас и ваших работ",800,2500],
+  ["transl","Переводы на другие языки","",500,2000],
+  ["seo","Стартовое SEO и аналитика","Чтобы сайт находили в поиске",600,2000]
+];
+
+function renderChecks(el, list){
+  el.innerHTML = list.map(([id,name,desc]) =>
+    `<label class="opt"><input type="checkbox" name="${id}"><span><b>${name}</b>${desc?`<small>${desc}</small>`:""}</span></label>`
+  ).join("");
+}
+renderChecks(document.getElementById("features"), FEATURES);
+renderChecks(document.getElementById("content"), CONTENT);
+
+const f = document.getElementById("f");
+const fmt = n => n.toLocaleString("de-CH").replace(/[’']/g, "\u2009");
+const round = n => n >= 10000 ? Math.round(n/500)*500 : Math.round(n/100)*100;
+const MAX = 60000;
+
+function calc(){
+  const t = TYPES[f.type.value], d = DESIGN[f.design.value];
+  const langs = +f.lang.value;
+  let lo = t.lo * d.k * LANG_K[langs], hi = t.hi * d.k * LANG_K[langs];
+  const picked = [];
+  for (const [id,name,,a,b] of FEATURES) if (f[id].checked){ lo+=a; hi+=b; picked.push(name); }
+  const made = [];
+  for (const [id,name,,a,b] of CONTENT) if (f[id].checked){
+    let m = 1;
+    if (id==="texts" || id==="photo") m = f.type.value==="landing" ? .6 : (f.type.value==="card" ? 1 : 1.8);
+    if (id==="transl") m = Math.max(langs-1, 1);
+    lo+=a*m; hi+=b*m; made.push(name);
+  }
+  const rush = f.time.value==="rush";
+  if (rush){ lo*=1.25; hi*=1.25; }
+  lo = round(lo*PRICE_K); hi = round(hi*PRICE_K);
+
+  document.getElementById("range").textContent = `${fmt(lo)} – ${fmt(hi)} CHF`;
+  const band = document.getElementById("band");
+  band.style.left = Math.min(lo/MAX,1)*100 + "%";
+  band.style.width = Math.max((Math.min(hi,MAX)-Math.min(lo,MAX))/MAX*100, 1.5) + "%";
+
+  let [w1,w2] = t.w;
+  const extra = picked.length > 2 ? 2 : 0;
+  w1 += extra; w2 += extra;
+  if (rush){ w1 = Math.max(1,Math.round(w1*.7)); w2 = Math.round(w2*.7); }
+  document.getElementById("weeks").textContent = `${w1}–${w2} ${tr("нед.")}`;
+  document.getElementById("support").textContent = `${t.sup[0]}–${t.sup[1]} ${tr("CHF/мес")}`;
+
+  window.D = {type:t.name, design:d.name, langs:(langs===3?"3+":String(langs)), features:picked.join(", "), made:made.join(", "), time:(rush?"срочно":"обычные"), lo, hi};
+  const L = s => tr(s) + (LANG === "fr" ? " : " : ": ");
+  const list = a => a.map(tr).join(", ");
+  return `${L("Сайт")}${tr(t.name)}
+${L("Дизайн")}${tr(d.name)}
+${L("Языков")}${langs===3?tr("3 и больше"):langs}
+${L("Функции")}${picked.length?list(picked):tr("базовые")}
+${L("Нужно сделать")}${made.length?list(made):tr("ничего дополнительно")}
+${L("Сроки")}${tr(rush?"срочно":"обычные")}
+${L("Ориентировочная стоимость")}${fmt(lo)} – ${fmt(hi)} CHF`;
+}
+
+const TXT = [["name","Имя"],["contact","Контакт"],["company","Компания"],["cursite","Текущий сайт"],["task","Задача"],["refs","Нравятся сайты"],["date","Дата запуска"],["budget","Бюджет"]];
+let calcText = calc(), summary = "";
+function build(){
+  const lines = [tr("БРИФ НА САЙТ"), ""];
+  for (const [k,label] of TXT){ const v = f[k].value.trim(); if (v) lines.push(`${tr(label)}${LANG==="fr"?" : ":": "}${v}`); }
+  lines.push("", calcText);
+  summary = lines.join("\n");
+  const enc = encodeURIComponent(summary);
+  document.getElementById("tg").href = TELEGRAM_USER ? TG_BASE + TELEGRAM_USER + "?text=" + enc : TG_BASE + "share/url?url=%20&text=" + enc;
+}
+build();
+f.addEventListener("change", () => { calcText = calc(); build(); });
+f.addEventListener("input", () => { build(); for (const id of ["f-name","f-contact"]) document.getElementById(id).classList.remove("err"); });
+
+function valid(){
+  let ok = true, first = null;
+  for (const [id,name] of [["f-name","name"],["f-contact","contact"]]){
+    if (!f[name].value.trim()){ ok = false; document.getElementById(id).classList.add("err"); first = first || f[name]; }
+  }
+  if (!ok){ toast(tr("Укажите имя и контакт, чтобы мы могли ответить")); first.focus(); }
+  return ok;
+}
+async function copyText(t){
+  try { await navigator.clipboard.writeText(t); return true; }
+  catch(e){
+    const ta = document.createElement("textarea"); ta.value = t; document.body.appendChild(ta); ta.select();
+    let ok = false; try { ok = document.execCommand("copy"); } catch(_){} ta.remove(); return ok;
+  }
+}
+document.getElementById("tg").addEventListener("click", e => {
+  if (!valid()){ e.preventDefault(); return; }
+  copyText(summary).then(ok => ok && toast(tr("Ответы скопированы: если чат открылся пустым, просто вставьте их")));
+});
+
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg; t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"), 2200);
+}
+const HAS_GAS = true;
+async function sendBrief(row){
+  const body = JSON.stringify(row);
+  try {
+    const r = await fetch(ENDPOINT, {method:"POST", body, credentials:"omit", redirect:"follow"});
+    const j = await r.json();
+    return !!(j && j.ok);
+  } catch(e) {
+    try { await fetch(ENDPOINT, {method:"POST", body, mode:"no-cors", credentials:"omit"}); return true; }
+    catch(_) { return false; }
+  }
+}
+const saveBtn = document.getElementById("save");
+const SENDTEXT = HAS_GAS
+  ? "Нажмите «Отправить бриф», и мы получим ваши ответы. Если удобнее, напишите нам в Telegram: ответы уже будут в сообщении."
+  : "Напишите нам в Telegram: откроется чат, а все ваши ответы уже будут в сообщении. Или скопируйте ответы и отправьте удобным способом.";
+let saveState = "Отправить бриф";
+function setSave(s){ saveState = s; saveBtn.textContent = tr(s); }
+if (!HAS_GAS) saveBtn.style.display = "none";
+saveBtn.addEventListener("click", () => {
+  if (!valid()) return;
+  saveBtn.disabled = true; setSave("Отправляем…");
+  const row = {}; for (const [k] of TXT) row[k] = f[k].value.trim();
+  Object.assign(row, window.D, {full: summary, lang: LANG.toUpperCase()});
+  sendBrief(row).then(ok => {
+    if (ok){ setSave("Бриф отправлен ✓"); toast(tr("Спасибо! Мы свяжемся с вами в ближайшее время")); }
+    else { saveBtn.disabled = false; setSave("Отправить бриф"); toast(tr("Не получилось отправить. Напишите нам в Telegram")); }
+  });
+});
+document.getElementById("copy").addEventListener("click", async () => {
+  toast(tr(await copyText(summary) ? "Ответы скопированы" : "Не удалось скопировать. Выделите текст вручную"));
+});
+document.getElementById("go").addEventListener("click", () =>
+  document.getElementById("final").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"})
+);
+
+/* === Переключение языка === */
+const I18N_NODES = [], I18N_ATTRS = [];
+(function collect(){
+  const skip = new Set([saveBtn, document.getElementById("sendtext")]);
+  const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => {
+      for (let p = n.parentNode; p; p = p.parentNode){ if (p.nodeName === "SCRIPT" || p.nodeName === "STYLE" || skip.has(p)) return NodeFilter.FILTER_REJECT; }
+      return FR[n.nodeValue.trim()] ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+    }
+  });
+  for (let n; (n = w.nextNode());){ const v = n.nodeValue, k = v.trim(); I18N_NODES.push([n, v.slice(0, v.indexOf(k)), k, v.slice(v.indexOf(k) + k.length)]); }
+  document.querySelectorAll("[placeholder]").forEach(el => { const k = el.getAttribute("placeholder"); if (FR[k]) I18N_ATTRS.push([el, k]); });
+})();
+function applyLang(l){
+  LANG = l === "fr" ? "fr" : "ru";
+  document.documentElement.lang = LANG;
+  for (const [n, a, k, b] of I18N_NODES) n.nodeValue = a + tr(k) + b;
+  for (const [el, k] of I18N_ATTRS) el.setAttribute("placeholder", tr(k));
+  document.getElementById("sendtext").textContent = tr(SENDTEXT);
+  saveBtn.textContent = tr(saveState);
+  document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.l === LANG)));
+  calcText = calc(); build();
+  try { localStorage.setItem("ca_lang", LANG); } catch(_){}
+}
+document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => applyLang(b.dataset.l)));
+(function initLang(){
+  let saved = null; try { saved = localStorage.getItem("ca_lang"); } catch(_){}
+  const fromUrl = new URLSearchParams(location.search).get("lang");
+  const guess = fromUrl || saved || ((navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "ru");
+  applyLang(guess);
+})();
+})();
+</script>
+</body>
+</html>
