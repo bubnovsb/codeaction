@@ -12,7 +12,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Cpolygon points='22,82 40,18 56,18 74,82 61,82 48,34 35,82' fill='%23fff'/%3E%3Crect x='32' y='56' width='30' height='10' fill='%23fff'/%3E%3Cpolygon points='70,82 82,82 96,18 84,18' fill='%23FF1F36'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FFFFFF; --surface:#FFFFFF; --ink:#000000; --muted:#5E5E5E; --line:#000000; --soft-line:#DADADA;
@@ -119,15 +119,124 @@ aside{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#000;color:#f
 .cookie button{font:600 13px "Oswald","Arial Narrow",sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:8px 14px;cursor:pointer;border:2px solid var(--ink);background:transparent;color:var(--ink)}
 .cookie button.ok{background:var(--accent);border-color:var(--accent);color:#fff}
 @media (prefers-reduced-motion:reduce){.band,.opt{transition:none}}
+
+/* ===== Дизайн по референсам (GAZU / lab.): тёплый серый, чёрный, оранжевый ===== */
+:root,:root[data-theme]{--bg:#ECEAE6;--surface:#F5F4F1;--band:#DAD7D1;--ink:#111111;--muted:#6B6863;--line:#111111;--soft-line:#D3CFC9;--accent:#F04E23;--accent-ink:#fff;--sel:#111111;--sel-ink:#fff;--track:#2A2A2A}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#ECEAE6;--surface:#F5F4F1;--band:#DAD7D1;--ink:#111111;--muted:#6B6863;--line:#111111;--soft-line:#D3CFC9;--accent:#F04E23;--sel:#111111;--sel-ink:#fff}}
+body{font-family:"Inter",system-ui,-apple-system,sans-serif;font-size:15.5px;letter-spacing:-.005em}
+.field input,.field textarea{font-family:"Inter",system-ui,sans-serif;background:var(--surface);border-color:var(--soft-line)}
+h1,h2,.num,.brand,legend .n{font-family:"Montserrat","Inter",system-ui,sans-serif}
+.cap{font:500 11px "Inter",sans-serif;letter-spacing:.26em;text-transform:uppercase}
+
+/* тонкая чёрная полоса сверху */
+.strip{background:#111;color:#fff;font:500 10.5px "Inter",sans-serif;letter-spacing:.2em;text-transform:uppercase;padding:9px 20px;padding-top:calc(9px + env(safe-area-inset-top,0px))}
+.strip .in{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;gap:16px}
+.strip-r{display:flex;gap:22px}
+.strip a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4)}
+.strip a:hover{border-color:#fff}
+@media (max-width:640px){.strip .in>span:first-child,.strip-r>span{display:none}.strip .in{justify-content:center}.strip{letter-spacing:.14em}}
+
+/* шапка светлая */
+.topbar{background:var(--bg);color:var(--ink);border-bottom:1px solid var(--soft-line);margin-top:0;padding-top:18px;padding-bottom:18px}
+.brand{font-size:15px;font-weight:600;letter-spacing:.28em}
+.brand svg polygon,.brand svg rect{fill:var(--ink)}
+.brand svg polyline{stroke:var(--ink)}
+.brand svg polygon:nth-of-type(2){fill:var(--accent)}
+.topbar small{color:var(--ink);font-size:11px;text-transform:uppercase;letter-spacing:.22em}
+.lang{border:1px solid var(--ink)}
+.lang button{color:var(--ink);font:600 11px "Inter",sans-serif;letter-spacing:.18em;padding:7px 12px}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+
+/* первый экран */
+header{border-left:0;padding-left:0;position:relative}
+header::before{content:"CODE ACTION — 2026";display:block;font:500 11px "Inter",sans-serif;letter-spacing:.3em;margin:0 0 22px;color:var(--ink)}
+h1{font-weight:600;text-transform:none;letter-spacing:-.045em;line-height:.98;font-size:clamp(40px,7.4vw,84px);max-width:13ch;margin-bottom:26px}
+.lead{font-size:15px;line-height:1.6;max-width:52ch;padding-left:18px;border-left:1px solid var(--ink)}
+.hero-art{display:none}
+@media (min-width:900px){
+  header{display:grid;grid-template-columns:minmax(0,1fr) 360px;column-gap:32px;align-items:end}
+  header::before{grid-column:1/-1}
+  header h1,header .lead{grid-column:1}
+  .hero-art{display:block;grid-column:2;grid-row:2 / span 2;position:relative;height:100%;min-height:330px}
+  .hero-block{position:absolute;left:0;right:0;bottom:0;height:64%;background:var(--accent)}
+  .hero-mark{position:absolute;left:-8%;bottom:14%;width:104%;height:auto;color:var(--ink)}
+  .hero-mark .sl{fill:#fff}
+  .hero-v{position:absolute;right:-26px;top:0;writing-mode:vertical-rl;font:600 11px "Inter",sans-serif;letter-spacing:.26em;text-transform:uppercase}
+  .hero-no{position:absolute;left:-40px;bottom:0;writing-mode:vertical-rl;transform:rotate(180deg);font:600 26px "Montserrat",sans-serif;letter-spacing:.02em}
+  .hero-go{position:absolute;left:0;bottom:0;width:48px;height:48px;background:#111;color:#fff;display:grid;place-items:center;text-decoration:none;font-size:18px}
+  .hero-go:hover{background:#000}
+}
+
+/* полоса преимуществ, как у GAZU */
+.feats{grid-column:1/-1;list-style:none;margin:6px 0 0;padding:26px 28px;background:var(--band);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+.feats li{display:flex;gap:14px;align-items:flex-start}
+.feats svg{width:30px;height:30px;flex:none;fill:none;stroke:var(--ink);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.feats b{display:block;font:600 11.5px "Inter",sans-serif;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
+.feats small{color:var(--muted);font-size:13px}
+@media (max-width:899px){.feats{grid-template-columns:1fr 1fr;padding:22px}}
+@media (max-width:520px){.feats{gap:18px 14px;padding:20px 18px}.feats li{flex-direction:column;gap:8px}.feats svg{width:24px;height:24px}.feats b{font-size:10.5px;letter-spacing:.1em}}
+
+/* вопросы */
+fieldset{border-top:1px solid var(--line);padding:30px 0}
+legend{align-items:center}
+legend .n{font:500 11px "Inter",sans-serif;letter-spacing:.2em;color:var(--muted);min-width:28px}
+legend .n::before{content:"0"}
+legend h2{font-size:22px;font-weight:600;text-transform:none;letter-spacing:-.025em}
+.opt{background:var(--surface);border:1px solid transparent;padding:14px 16px}
+.opt:hover{border-color:var(--ink)}
+.opt b{font-weight:600;letter-spacing:-.01em}
+.opt input{accent-color:var(--accent)}
+
+/* панель цены */
+aside{background:#111;border-top:0;outline:0;box-shadow:inset 0 5px 0 var(--accent)}
+.est-label{color:#8E8B86;font-size:11px;letter-spacing:.26em}
+.num{font-weight:600;letter-spacing:-.02em}
+.scale{background:#2A2A2A;height:6px}
+.band{background:var(--accent)}
+.ticks,.note,.rate{color:#8E8B86}
+.meta li{border-top-color:#2A2A2A}
+.meta span:first-child{color:#8E8B86}
+.cur{border:1px solid #3A3A3A}
+.cur button{font:600 10.5px "Inter",sans-serif;letter-spacing:.16em;color:#8E8B86}
+.cur button[aria-pressed="true"]{background:#fff;color:#111}
+.mobile-go{color:var(--accent)}
+
+/* финальный блок — чёрная секция */
+.final{border-top:0;background:#111;color:#fff;padding:34px 30px 30px;margin-top:8px}
+.final h2{text-transform:none;font-weight:600;letter-spacing:-.03em;font-size:34px;color:#fff}
+.final p{color:#A9A6A0}
+.final::before{content:"08 — BRIEF";display:block;font:500 11px "Inter",sans-serif;letter-spacing:.26em;color:var(--accent);margin-bottom:14px}
+.btn{font:600 12px "Inter",sans-serif;letter-spacing:.2em;padding:17px 18px;border-width:1px}
+.final .btn.tg{background:#fff;border-color:#fff;color:#111}
+.final .btn.ghost{color:#fff;border-color:#fff}
+.final .btn.ghost:hover{background:#fff;color:#111}
+.btn.tg{background:var(--ink);color:var(--bg)}
+
+/* подвал с огромным словом */
+.ulink{color:inherit;text-decoration:none;font:600 11px "Inter",sans-serif;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:3px}
+.foot{border-top:1px solid var(--soft-line);padding:26px 20px 0;overflow:hidden}
+.foot .in{max-width:1080px;margin:0 auto}
+.foot-row{display:flex;gap:24px;align-items:center;font:500 11px "Inter",sans-serif;letter-spacing:.2em;text-transform:uppercase}
+.foot-row span{margin-right:auto}
+.foot-word{font:600 clamp(64px,15.5vw,190px)/.8 "Montserrat",sans-serif;letter-spacing:-.06em;white-space:nowrap;margin:26px 0 -.12em -.04em;color:var(--ink)}
+.foot-word i{font-style:normal;color:var(--accent)}
+@media (max-width:899px){.foot{padding-bottom:190px}}
+
+.toast{background:var(--ink)}
+.cookie{background:var(--surface);border:1px solid var(--ink);box-shadow:0 20px 40px rgba(0,0,0,.12)}
+.cookie button{font:600 11px "Inter",sans-serif;letter-spacing:.18em;border-width:1px}
 </style>
 </head>
 <body>
+<a id="top"></a><div class="strip"><div class="in"><span>Бриф за 3 минуты · цена сразу</span><span class="strip-r"><span>RU · FR</span><a href="https://t.me/code_action_a" target="_blank" rel="noopener">Telegram @code_action_a</a></span></div></div>
 <div class="topbar"><div class="in"><span class="brand" role="img" aria-label="Code Action"><svg width="62" height="28" viewBox="0 6 168 88" aria-hidden="true" style="display:block"><polyline points="28,14 6,50 28,86" fill="none" stroke="#fff" stroke-width="15"/><polygon points="34,92 54,8 72,8 92,92 76,92 63,38 50,92" fill="#fff"/><rect x="46" y="60" width="34" height="13" fill="#fff"/><polygon points="96,92 112,92 132,8 116,8" fill="#FF1F36"/><polyline points="140,14 162,50 140,86" fill="none" stroke="#fff" stroke-width="15"/></svg><span>CODE ACTION</span></span><div class="right"><small>Калькулятор стоимости сайта</small><div class="lang" role="group" aria-label="Язык / Langue"><button type="button" data-l="ru" aria-pressed="true">RU</button><button type="button" data-l="fr" aria-pressed="false">FR</button></div></div></div></div>
 <div class="wrap">
   <header>
     <h1>Сколько будет стоить ваш сайт</h1>
     <p class="lead">Ответьте на вопросы, и вы сразу увидите ориентировочную стоимость сайта. В конце отправьте нам бриф: обсудим проект и назовём точную цену.</p>
+    <div class="hero-art" aria-hidden="true"><div class="hero-block"></div><svg class="hero-mark" viewBox="0 6 168 88" aria-hidden="true"><polyline points="28,14 6,50 28,86" fill="none" stroke="currentColor" stroke-width="15"/><polygon points="34,92 54,8 72,8 92,92 76,92 63,38 50,92" fill="currentColor"/><rect x="46" y="60" width="34" height="13" fill="currentColor"/><polygon class="sl" points="96,92 112,92 132,8 116,8"/><polyline points="140,14 162,50 140,86" fill="none" stroke="currentColor" stroke-width="15"/></svg><span class="hero-v">Сайты под ключ — 2026</span><span class="hero-no">001</span><a class="hero-go" href="#f" tabindex="-1">→</a></div>
   </header>
+  <ul class="feats"><li><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M16 9v7l5 3"/></svg><span><b>Бриф за 3 минуты</b><small>7 простых вопросов</small></span></li><li><svg viewBox="0 0 32 32"><ellipse cx="13" cy="10" rx="8" ry="3.5"/><path d="M5 10v6c0 1.9 3.6 3.5 8 3.5s8-1.6 8-3.5v-6"/><path d="M11 22.5c.6 1.6 3.9 3 8 3 4.4 0 8-1.6 8-3.5v-6c0-1.7-2.8-3.1-6.6-3.4"/></svg><span><b>Цена сразу</b><small>в CHF, EUR, USD или RUB</small></span></li><li><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="12"/><path d="M4 16h24M16 4c3.5 3.4 5 7.4 5 12s-1.5 8.6-5 12c-3.5-3.4-5-7.4-5-12s1.5-8.6 5-12z"/></svg><span><b>Сайт на нескольких языках</b><small>русский, французский и другие</small></span></li><li><svg viewBox="0 0 32 32"><path d="M20.5 5.5a6.5 6.5 0 0 0-6.2 8.5L5 23.3 8.7 27l9.3-9.3a6.5 6.5 0 0 0 8.5-6.2l-4 4-4.2-1-1-4.2z"/></svg><span><b>Поддержка после запуска</b><small>обновления и доработки</small></span></li></ul>
 
   <form id="f">
     <fieldset>
@@ -219,6 +328,7 @@ aside{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#000;color:#f
     <p class="rate" id="rate"></p>
   </aside>
 </div>
+<footer class="foot"><div class="in"><div class="foot-row"><span>© 2026 CODE ACTION</span><a class="ulink" href="https://t.me/code_action_a" target="_blank" rel="noopener">Telegram →</a><a class="ulink" href="#top">Наверх ↑</a></div><div class="foot-word" aria-hidden="true">code action<i>.</i></div></div></footer>
 <div class="toast" id="toast" role="status"></div>
 <div class="cookie" id="cookie" hidden role="dialog" aria-live="polite"><p id="cookieText">Мы используем cookies и сервисы аналитики (Яндекс Метрика, Google Analytics), чтобы понять, как улучшить сайт.</p><div class="cbtns"><button type="button" id="cookieNo">Отказаться</button><button type="button" class="ok" id="cookieOk">Принять</button></div></div>
 
@@ -231,6 +341,17 @@ const TELEGRAM_USER = "code_action_a";     /* ник без @ */
 
 /* === Перевод: русский текст → французский === */
 const FR = {
+  "Бриф за 3 минуты · цена сразу":"Brief en 3 minutes · prix immédiat",
+  "Сайты под ключ — 2026":"Sites clés en main — 2026",
+  "Бриф за 3 минуты":"Brief en 3 minutes",
+  "7 простых вопросов":"7 questions simples",
+  "Цена сразу":"Prix immédiat",
+  "в CHF, EUR, USD или RUB":"en CHF, EUR, USD ou RUB",
+  "Сайт на нескольких языках":"Site multilingue",
+  "русский, французский и другие":"français, russe et autres",
+  "Поддержка после запуска":"Maintenance après lancement",
+  "обновления и доработки":"mises à jour et évolutions",
+  "Наверх ↑":"Haut de page ↑",
   "Калькулятор стоимости сайта":"Calculateur du prix d’un site",
   "Сколько будет стоить ваш сайт":"Combien coûtera votre site",
   "Ответьте на вопросы, и вы сразу увидите ориентировочную стоимость сайта. В конце отправьте нам бриф: обсудим проект и назовём точную цену.":"Répondez aux questions et vous verrez tout de suite le prix indicatif de votre site. À la fin, envoyez-nous le brief\u00a0: nous discuterons du projet et vous donnerons le prix exact.",
