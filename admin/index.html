@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Cpolygon points='22,82 40,18 56,18 74,82 61,82 48,34 35,82' fill='%23fff'/%3E%3Crect x='32' y='56' width='30' height='10' fill='%23fff'/%3E%3Cpolygon points='70,82 82,82 96,18 84,18' fill='%23FF1F36'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Golos+Text:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#FFFFFF; --ink:#000000; --muted:#5E5E5E; --line:#000000; --soft-line:#DADADA; --soft:#F4F4F4;
@@ -152,6 +152,63 @@ dialog::backdrop{background:rgba(0,0,0,.6)}
 .dlg-foot{display:flex;justify-content:flex-end;gap:8px;padding:0 18px 18px;flex-wrap:wrap}
 .dlg-x{background:transparent;border:0;color:#fff;font-size:26px;line-height:1;cursor:pointer;padding:0 4px}
 .hint2{font-size:13px;color:var(--muted);margin:0 0 12px}
+
+/* ===== Дизайн как у калькулятора: тёплый серый, графит, оранжевый; Montserrat + Inter ===== */
+:root,:root[data-theme]{--bg:#ECEAE6;--ink:#111111;--muted:#6B6863;--line:#111111;--soft-line:#D3CFC9;--soft:#F5F4F1;--accent:#F04E23;--sel:#46433F;--sel-ink:#fff;--dark:#46433F;--dark-line:#5C5954;--dark-muted:#B8B4AD}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#ECEAE6;--ink:#111111;--muted:#6B6863;--line:#111111;--soft-line:#D3CFC9;--soft:#F5F4F1;--accent:#F04E23;--sel:#46433F;--sel-ink:#fff}}
+body{font-family:"Inter",system-ui,-apple-system,sans-serif;font-size:15.5px;letter-spacing:-.005em}
+h1,h2,h3,.o{font-family:"Montserrat","Inter",system-ui,sans-serif}
+.search,.note,.fld input,.fld textarea,.fld select,.login input{font-family:"Inter",system-ui,sans-serif;background:var(--soft);border:1px solid var(--soft-line)}
+.login input{border-color:var(--ink)}
+.topbar{background:var(--bg);color:var(--ink);border-bottom:1px solid var(--soft-line)}
+.brand{font:600 15px/1 "Montserrat",sans-serif;letter-spacing:.28em}
+.brand small{font:500 11px "Inter",sans-serif;letter-spacing:.22em;color:var(--muted)}
+.brand svg polygon,.brand svg rect{fill:var(--ink)}
+.brand svg polyline{stroke:var(--ink)}
+.brand svg polygon:nth-of-type(2){fill:var(--accent)}
+.tb-btn{border:1px solid var(--ink);color:var(--ink);font:600 11px "Inter",sans-serif;letter-spacing:.16em;padding:8px 12px}
+.tb-btn:hover{background:var(--ink);color:var(--bg)}
+.chip,.tag,.st,.due,.mini,.sel,.tbtn,.btn{font-family:"Inter",sans-serif;font-weight:600;letter-spacing:.14em}
+.chip,.sel,.tbtn,.mini{font-size:11px}
+.tag,.st,.due{font-size:10px}
+.btn{font-size:12px;letter-spacing:.18em;border-width:1px}
+.chip,.mini,.sel{border-width:1px}
+.tbtn{border-width:1px}
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat b{font:600 32px/1.1 "Montserrat",sans-serif;letter-spacing:-.03em}
+.stat span{font:500 10.5px "Inter",sans-serif;letter-spacing:.2em}
+.card{background:var(--soft);border:1px solid transparent}
+.card:hover{border-color:var(--ink)}
+.card[aria-current="true"]{border-color:var(--dark);box-shadow:inset 5px 0 0 var(--accent)}
+.card .nm{font:600 17px/1.25 "Montserrat",sans-serif;text-transform:none;letter-spacing:-.02em}
+.price{font:600 15px "Montserrat",sans-serif;letter-spacing:-.01em}
+.deal{font:600 14px "Montserrat",sans-serif}
+.tag{border-color:var(--soft-line)}
+.st{border-width:1px}
+.st.work{background:var(--dark);border-color:var(--dark);color:#fff}
+.due{border-width:1px}
+.empty,.placeholder{border-width:1px}
+.detail{border-top:0;box-shadow:inset 0 5px 0 var(--accent);padding-top:22px}
+.d-head h2{font:600 clamp(26px,3.6vw,38px)/1.05 "Montserrat",sans-serif;text-transform:none;letter-spacing:-.035em}
+.d-price{background:var(--dark)}
+.d-price div span{color:var(--dark-muted);font:500 10.5px "Inter",sans-serif;letter-spacing:.2em}
+.d-price div b{font:600 24px "Montserrat",sans-serif;letter-spacing:-.02em}
+.sec{border-top:1px solid var(--line)}
+.sec h3{font:500 10.5px "Inter",sans-serif;letter-spacing:.24em}
+.text{background:var(--soft)}
+.pill{border:1px solid var(--soft-line);background:var(--soft)}
+.btn.dark{background:var(--dark);border-color:var(--dark);color:#fff}
+@media (max-width:979px){.detail{box-shadow:none}.d-mobilebar{background:var(--dark);border-bottom:4px solid var(--accent)}}
+.login header{border-left:0;padding-left:0}
+.login header::before{content:"CODE ACTION — БРИФЫ";display:block;font:500 11px "Inter",sans-serif;letter-spacing:.3em;margin:0 0 18px}
+.login h1{font-weight:600;text-transform:none;letter-spacing:-.045em;font-size:52px}
+.dlg-head{background:var(--dark);border-bottom:4px solid var(--accent)}
+.dlg-head h3{font:600 19px "Montserrat",sans-serif;text-transform:none;letter-spacing:-.02em}
+dialog{background:var(--bg)}
+.toast{background:var(--dark)}
+.d-price b[style]{color:#FF8A66!important}
+@media (max-width:520px){.brand{font-size:13px;letter-spacing:.12em;gap:8px}.tb-btn{padding:7px 8px;letter-spacing:.08em;font-size:10.5px}}
+.d-mobilebar .tb-btn,.dlg-head .tb-btn{color:#fff;border-color:#fff}.d-mobilebar .tb-btn:hover{background:#fff;color:var(--dark)}
 </style>
 </head>
 <body>
