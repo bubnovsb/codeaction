@@ -225,6 +225,15 @@ aside{background:#111;border-top:0;outline:0;box-shadow:inset 0 5px 0 var(--acce
 .toast{background:var(--ink)}
 .cookie{background:var(--surface);border:1px solid var(--ink);box-shadow:0 20px 40px rgba(0,0,0,.12)}
 .cookie button{font:600 11px "Inter",sans-serif;letter-spacing:.18em;border-width:1px}
+
+/* мягкий тёплый серый вместо чёрного в выделениях и тёмных блоках */
+:root,:root[data-theme]{--sel:#46433F}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sel:#46433F}}
+aside,.final,.hero-go,.strip{background:#46433F}
+.scale{background:#5C5954}.meta li{border-top-color:#5C5954}.cur{border-color:#5C5954}
+.est-label,.meta span:first-child,.ticks,.note,.rate,.cur button{color:#B8B4AD}
+.final p{color:#C9C5BE}
+.cur button[aria-pressed="true"]{color:#46433F}
 </style>
 </head>
 <body>
