@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CODE ACTION — стоимость сайта · prix d’un site</title>
-<meta name="description" content="Калькулятор стоимости сайта: ответьте на 6 вопросов и получите вилку цен в CHF. Calculateur du prix d’un site web en CHF.">
+<meta name="description" content="Калькулятор стоимости сайта: ответьте на 7 вопросов и сразу узнайте ориентировочную цену. Calculateur du prix d’un site web : découvrez le prix indicatif.">
 <meta property="og:title" content="CODE ACTION — сколько стоит ваш сайт · combien coûtera votre site">
-<meta property="og:description" content="Ответьте на 6 вопросов и сразу увидите вилку цен в CHF. Répondez à 6 questions et voyez la fourchette de prix en CHF.">
+<meta property="og:description" content="Ответьте на 7 вопросов и сразу узнайте ориентировочную стоимость сайта. Répondez à 7 questions et découvrez le prix indicatif de votre site.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23000'/%3E%3Cpolygon points='22,82 40,18 56,18 74,82 61,82 48,34 35,82' fill='%23fff'/%3E%3Crect x='32' y='56' width='30' height='10' fill='%23fff'/%3E%3Cpolygon points='70,82 82,82 96,18 84,18' fill='%23FF1F36'/%3E%3C/svg%3E">
@@ -126,7 +126,7 @@ aside{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#000;color:#f
 <div class="wrap">
   <header>
     <h1>Сколько будет стоить ваш сайт</h1>
-    <p class="lead">Ответьте на вопросы, и вы сразу увидите ориентировочную вилку цен. Расчёт основан на средних ценах швейцарских веб-агентств в 2026 году. В конце отправьте бриф нам, и мы подготовим точную смету.</p>
+    <p class="lead">Ответьте на вопросы, и вы сразу увидите ориентировочную стоимость сайта. В конце отправьте нам бриф: обсудим проект и назовём точную цену.</p>
   </header>
 
   <form id="f">
@@ -214,7 +214,7 @@ aside{position:fixed;left:0;right:0;bottom:0;z-index:10;background:#000;color:#f
         <li><span>Срок разработки</span><span id="weeks">—</span></li>
         <li><span>Поддержка после запуска</span><span id="support">—</span></li>
       </ul>
-      <p class="note" id="note">Цены в швейцарских франках, без НДС. Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.</p>
+      <p class="note" id="note">Цены в швейцарских франках, без НДС. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.</p>
     </div>
     <p class="rate" id="rate"></p>
   </aside>
@@ -233,7 +233,8 @@ const TELEGRAM_USER = "code_action_a";     /* ник без @ */
 const FR = {
   "Калькулятор стоимости сайта":"Calculateur du prix d’un site",
   "Сколько будет стоить ваш сайт":"Combien coûtera votre site",
-  "Ответьте на вопросы, и вы сразу увидите ориентировочную вилку цен. Расчёт основан на средних ценах швейцарских веб-агентств в 2026 году. В конце отправьте бриф нам, и мы подготовим точную смету.":"Répondez aux questions et vous verrez tout de suite une fourchette de prix indicative. Le calcul se base sur les prix moyens des agences web suisses en 2026. À la fin, envoyez-nous le brief et nous préparerons un devis précis.",
+  "Ответьте на вопросы, и вы сразу увидите ориентировочную стоимость сайта. В конце отправьте нам бриф: обсудим проект и назовём точную цену.":"Répondez aux questions et vous verrez tout de suite le prix indicatif de votre site. À la fin, envoyez-nous le brief\u00a0: nous discuterons du projet et vous donnerons le prix exact.",
+  "от":"dès",
   "Какой сайт нужен?":"Quel site vous faut-il ?",
   "Одностраничный сайт":"Site one-page",
   "Одна страница о вас или об одной услуге, по вашим готовым текстам и фото":"Une seule page sur vous ou sur un service, avec vos textes et photos",
@@ -306,7 +307,7 @@ const FR = {
   "Ориентировочная стоимость":"Coût estimatif",
   "Срок разработки":"Délai de réalisation",
   "Поддержка после запуска":"Maintenance après lancement",
-  "Цены в швейцарских франках, без НДС. Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.":"Prix en francs suisses, hors TVA. Il s’agit d’une estimation et non d’une offre : le coût final dépend des détails du projet.",
+  "Цены в швейцарских франках, без НДС. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.":"Prix en francs suisses, hors TVA. Il ne s’agit pas d’une offre, mais d’un prix indicatif\u00a0: nous fixerons le prix exact avec vous en discutant du projet.",
   "Нажмите «Отправить бриф», и мы получим ваши ответы. Если удобнее, напишите нам в Telegram: ответы уже будут в сообщении.":"Cliquez sur « Envoyer le brief » et nous recevrons vos réponses. Si vous préférez, écrivez-nous sur Telegram : vos réponses seront déjà dans le message.",
   "Напишите нам в Telegram: откроется чат, а все ваши ответы уже будут в сообщении. Или скопируйте ответы и отправьте удобным способом.":"Écrivez-nous sur Telegram : la conversation s’ouvrira avec toutes vos réponses dans le message. Ou copiez vos réponses et envoyez-les comme vous le souhaitez.",
   "нед.":"sem.", "CHF/мес":"CHF/mois",
@@ -322,9 +323,9 @@ const FR = {
   "Нужно сделать":"À réaliser", "ничего дополнительно":"rien de plus", "Сроки":"Délais", "срочно":"urgent", "обычные":"normaux",
   "Шаблон":"Modèle", "Индивидуальный":"Sur mesure", "Премиальный с анимацией":"Premium avec animations",
   "Язык":"Langue",
-  "Цены в евро, без НДС, по актуальному курсу (округлено вверх). Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.":"Prix en euros, hors TVA, au taux du jour (arrondis vers le haut). Il s’agit d’une estimation et non d’une offre\u00a0: le coût final dépend des détails du projet.",
-  "Цены в рублях, без НДС, по актуальному курсу (округлено вверх). Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.":"Prix en roubles, hors TVA, au taux du jour (arrondis vers le haut). Il s’agit d’une estimation et non d’une offre\u00a0: le coût final dépend des détails du projet.",
-  "Цены в долларах США, без НДС, по актуальному курсу (округлено вверх). Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.":"Prix en dollars US, hors TVA, au taux du jour (arrondis vers le haut). Il s’agit d’une estimation et non d’une offre\u00a0: le coût final dépend des détails du projet.",
+  "Цены в евро, без НДС, по актуальному курсу. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.":"Prix en euros, hors TVA, au taux du jour. Il ne s’agit pas d’une offre, mais d’un prix indicatif\u00a0: nous fixerons le prix exact avec vous en discutant du projet.",
+  "Цены в рублях, без НДС, по актуальному курсу. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.":"Prix en roubles, hors TVA, au taux du jour. Il ne s’agit pas d’une offre, mais d’un prix indicatif\u00a0: nous fixerons le prix exact avec vous en discutant du projet.",
+  "Цены в долларах США, без НДС, по актуальному курсу. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.":"Prix en dollars US, hors TVA, au taux du jour. Il ne s’agit pas d’une offre, mais d’un prix indicatif\u00a0: nous fixerons le prix exact avec vous en discutant du projet.",
   "Курс":"Taux", "обновлён":"mis à jour", "/мес":"/mois",
   "Мы используем cookies и сервисы аналитики (Яндекс Метрика, Google Analytics), чтобы понять, как улучшить сайт.":"Nous utilisons des cookies et des outils d’analyse (Yandex Metrica, Google Analytics) pour améliorer le site.",
   "Принять":"Accepter", "Отказаться":"Refuser"
@@ -386,12 +387,13 @@ function nice(n, cur){
 }
 function conv(chf, cur){ cur = cur || CUR; return nice(chf * (RATES[cur] || 1), cur); }
 function money(chf, cur){ cur = cur || CUR; return cur === "CHF" ? fmt(chf) + " CHF" : fmt(conv(chf, cur)) + " " + CUR_SIGN[cur]; }
+function moneyFrom(lo, cur){ cur = cur || CUR; return tr("от") + " " + fmt(cur === "CHF" ? lo : conv(lo, cur)) + " " + CUR_SIGN[cur]; }
 function moneyRange(lo, hi, cur){ cur = cur || CUR; const s = CUR_SIGN[cur]; return `${fmt(cur === "CHF" ? lo : conv(lo, cur))} – ${fmt(cur === "CHF" ? hi : conv(hi, cur))} ${s}`; }
 const NOTE = {
-  CHF: "Цены в швейцарских франках, без НДС. Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.",
-  EUR: "Цены в евро, без НДС, по актуальному курсу (округлено вверх). Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.",
-  USD: "Цены в долларах США, без НДС, по актуальному курсу (округлено вверх). Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта.",
-  RUB: "Цены в рублях, без НДС, по актуальному курсу (округлено вверх). Это ориентир, а не оферта: итоговая стоимость зависит от деталей проекта."
+  CHF: "Цены в швейцарских франках, без НДС. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.",
+  EUR: "Цены в евро, без НДС, по актуальному курсу. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.",
+  USD: "Цены в долларах США, без НДС, по актуальному курсу. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта.",
+  RUB: "Цены в рублях, без НДС, по актуальному курсу. Это не оферта, а ориентировочная стоимость: точную цену мы определим вместе с вами при обсуждении проекта."
 };
 function paintCurrencyUi(){
   document.querySelectorAll(".cur button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.c === CUR)));
@@ -444,17 +446,17 @@ function calc(){
   if (rush){ lo*=1.25; hi*=1.25; }
   lo = round(lo*PRICE_K); hi = round(hi*PRICE_K);
 
-  document.getElementById("range").textContent = moneyRange(lo, hi); fitRange();
+  document.getElementById("range").textContent = moneyFrom(lo); fitRange();
   const band = document.getElementById("band");
-  band.style.left = Math.min(lo/MAX,1)*100 + "%";
-  band.style.width = Math.max((Math.min(hi,MAX)-Math.min(lo,MAX))/MAX*100, 1.5) + "%";
+  band.style.left = "0%";
+  band.style.width = Math.max(Math.min(lo/MAX,1)*100, 1.5) + "%";
 
   let [w1,w2] = t.w;
   const extra = picked.length > 2 ? 1 : 0;
   w1 += extra; w2 += extra;
   if (rush){ w1 = Math.max(1,Math.round(w1*.7)); w2 = Math.max(w1,Math.round(w2*.7)); }
   document.getElementById("weeks").textContent = `${w1 === w2 ? w1 : w1 + "–" + w2} ${tr("нед.")}`;
-  document.getElementById("support").textContent = CUR === "CHF" ? `${t.sup[0]}–${t.sup[1]} ${tr("CHF/мес")}` : `${fmt(conv(t.sup[0]))}–${fmt(conv(t.sup[1]))} ${CUR_SIGN[CUR]}${tr("/мес")}`;
+  document.getElementById("support").textContent = CUR === "CHF" ? `${tr("от")} ${t.sup[0]} ${tr("CHF/мес")}` : `${tr("от")} ${fmt(conv(t.sup[0]))} ${CUR_SIGN[CUR]}${tr("/мес")}`;
 
   window.D = {type:t.name, design:d.name, langs:(langs===3?"3+":String(langs)), features:picked.join(", "), made:made.join(", "), time:(rush?"срочно":"обычные"), lo, hi, cur: CUR};
   const L = s => tr(s) + (LANG === "fr" ? " : " : ": ");
@@ -465,7 +467,7 @@ ${L("Языков")}${langs===3?tr("3 и больше"):langs}
 ${L("Функции")}${picked.length?list(picked):tr("базовые")}
 ${L("Нужно сделать")}${made.length?list(made):tr("ничего дополнительно")}
 ${L("Сроки")}${tr(rush?"срочно":"обычные")}
-${L("Ориентировочная стоимость")}${moneyRange(lo, hi)}${CUR === "CHF" ? "" : " (" + fmt(lo) + " – " + fmt(hi) + " CHF)"}`;
+${L("Ориентировочная стоимость")}${moneyFrom(lo)}${CUR === "CHF" ? "" : " (" + tr("от") + " " + fmt(lo) + " CHF)"}`;
 }
 
 const TXT = [["name","Имя"],["contact","Контакт"],["company","Компания"],["cursite","Текущий сайт"],["task","Задача"],["refs","Нравятся сайты"],["date","Дата запуска"],["budget","Бюджет"]];
